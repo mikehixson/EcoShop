@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Iron Bar",
+    "amount": 5
+  },
+  {
+    "name": "Iron Pipe",
+    "amount": 4
+  },
+  {
+    "name": "Lumber",
+    "amount": 1.25
+  },
+  {
+    "name": "Cellulose Fiber",
+    "amount": 0.25
+  },
+  {
+    "name": "Leather Hide",
+    "amount": 0.2
+  }
+]

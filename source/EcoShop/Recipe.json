@@ -1,0 +1,579 @@
+﻿[
+  {
+    "products": [
+      {
+        "name": "Screws",
+        "quantity": 1
+      }
+    ],
+    "ingredients": [
+      {
+        "name": "Iron Bar",
+        "quantity": {
+          "type": "SkillModified",
+          "skill": "Mechanics",
+          "value": 3
+        }
+      }
+    ]
+  },
+
+  {
+    "products": [
+      {
+        "name": "Iron Plate",
+        "quantity": 1
+      }
+    ],
+    "ingredients": [
+      {
+        "name": "Iron Bar",
+        "quantity": {
+          "type": "SkillModified",
+          "skill": "Mechanics",
+          "value": 6
+        }
+      }
+    ]
+  },
+
+  {
+    "products": [
+      {
+        "name": "Iron Piston",
+        "quantity": 1
+      }
+    ],
+    "ingredients": [
+      {
+        "name": "Iron Bar",
+        "quantity": {
+          "type": "SkillModified",
+          "skill": "Mechanics",
+          "value": 8
+        }
+      },
+      {
+        "name": "Iron Pipe",
+        "quantity": {
+          "type": "SkillModified",
+          "skill": "Mechanics",
+          "value": 8
+        }
+      }
+    ]
+  },
+
+  {
+    "products": [
+      {
+        "name": "Iron Pipe",
+        "quantity": 1
+      }
+    ],
+    "ingredients": [
+      {
+        "name": "Iron Bar",
+        "quantity": {
+          "type": "SkillModified",
+          "skill": "Smelting",
+          "value": 3
+        }
+      }
+    ]
+  },
+
+  {
+    "products": [
+      {
+        "name": "Iron Gear",
+        "quantity": 1
+      }
+    ],
+    "ingredients": [
+      {
+        "name": "Iron Bar",
+        "quantity": {
+          "type": "SkillModified",
+          "skill": "Mechanics",
+          "value": 3
+        }
+      }
+    ]
+  },
+
+  {
+    "products": [
+      {
+        "name": "Gearbox",
+        "quantity": 1
+      }
+    ],
+    "ingredients": [
+      {
+        "name": "Iron Bar",
+        "quantity": {
+          "type": "SkillModified",
+          "skill": "Mechanics",
+          "value": 8
+        }
+      },
+      {
+        "name": "Iron Gear",
+        "quantity": {
+          "type": "SkillModified",
+          "skill": "Mechanics",
+          "value": 8
+        }
+      }
+    ]
+  },
+
+  {
+    "products": [
+      {
+        "name": "Iron Wheel",
+        "quantity": 1
+      }
+    ],
+    "ingredients": [
+      {
+        "name": "Iron Bar",
+        "quantity": {
+          "type": "SkillModified",
+          "skill": "Mechanics",
+          "value": 30
+        }
+      }
+    ]
+  },
+
+  {
+    "products": [
+      {
+        "name": "Iron Axle",
+        "quantity": 1
+      }
+    ],
+    "ingredients": [
+      {
+        "name": "Iron Bar",
+        "quantity": {
+          "type": "SkillModified",
+          "skill": "Mechanics",
+          "value": 6
+        }
+      }
+    ]
+  },
+
+  {
+    "products": [
+      {
+        "name": "Boiler",
+        "quantity": 1
+      }
+    ],
+    "ingredients": [
+      {
+        "name": "Iron Plate",
+        "quantity": {
+          "type": "SkillModified",
+          "skill": "Mechanics",
+          "value": 30
+        }
+      },
+      {
+        "name": "Screws",
+        "quantity": {
+          "type": "SkillModified",
+          "skill": "Mechanics",
+          "value": 16
+        }
+      }
+    ]
+  },
+
+  {
+    "products": [
+      {
+        "name": "Portable Steam Engine",
+        "quantity": 1
+      }
+    ],
+    "ingredients": [
+      {
+        "name": "Iron Piston",
+        "quantity": {
+          "type": "SkillModified",
+          "skill": "Mechanics",
+          "value": 20
+        }
+      },
+      {
+        "name": "Screws",
+        "quantity": {
+          "type": "SkillModified",
+          "skill": "Mechanics",
+          "value": 30
+        }
+      },
+      {
+        "name": "Iron Plate",
+        "quantity": {
+          "type": "SkillModified",
+          "skill": "Mechanics",
+          "value": 30
+        }
+      },
+      {
+        "name": "Iron Gear",
+        "quantity": {
+          "type": "SkillModified",
+          "skill": "Mechanics",
+          "value": 20
+        }
+      },
+      {
+        "name": "Boiler",
+        "quantity": {
+          "type": "SkillModified",
+          "skill": "Mechanics",
+          "value": 8
+        }
+      }
+    ]
+  },
+
+  {
+    "products": [
+      {
+        "name": "Wooden Elevator",
+        "quantity": 1
+      }
+    ],
+    "ingredients": [
+      {
+        "name": "Portable Steam Engine",
+        "quantity": 1
+      },
+      {
+        "name": "Gearbox",
+        "quantity": {
+          "type": "SkillModified",
+          "skill": "Mechanics",
+          "value": 10
+        }
+      },
+      {
+        "name": "Lumber",
+        "quantity": {
+          "type": "SkillModified",
+          "skill": "Mechanics",
+          "value": 30
+        }
+      },
+      {
+        "name": "Cellulose Fiber",
+        "quantity": {
+          "type": "SkillModified",
+          "skill": "Mechanics",
+          "value": 20
+        }
+      }
+    ]
+  },
+
+  {
+    "products": [
+      {
+        "name": "Steam Truck",
+        "quantity": 1
+      }
+    ],
+    "ingredients": [
+      {
+        "name": "Portable Steam Engine",
+        "quantity": 1
+      },
+      {
+        "name": "Iron Wheel",
+        "quantity": 4
+      },
+      {
+        "name": "Iron Axle",
+        "quantity": 1
+      },
+      {
+        "name": "Iron Plate",
+        "quantity": {
+          "type": "SkillModified",
+          "skill": "Mechanics",
+          "value": 30
+        }
+      },
+      {
+        "name": "Iron Pipe",
+        "quantity": {
+          "type": "SkillModified",
+          "skill": "Mechanics",
+          "value": 20
+        }
+      },
+      {
+        "name": "Screws",
+        "quantity": {
+          "type": "SkillModified",
+          "skill": "Mechanics",
+          "value": 40
+        }
+      },
+      {
+        "name": "Lumber",
+        "quantity": {
+          "type": "SkillModified",
+          "skill": "Mechanics",
+          "value": 30
+        }
+      },
+      {
+        "name": "Leather Hide",
+        "quantity": {
+          "type": "SkillModified",
+          "skill": "Mechanics",
+          "value": 20
+        }
+      }
+    ]
+  },
+  // todo: verify all below in-game
+  {
+    "products": [
+      {
+        "name": "Steam Tractor",
+        "quantity": 1
+      }
+    ],
+    "ingredients": [
+      {
+        "name": "Portable Steam Engine",
+        "quantity": 1
+      },
+      {
+        "name": "Iron Wheel",
+        "quantity": 4
+      },
+      {
+        "name": "Iron Axle",
+        "quantity": 1
+      },
+      {
+        "name": "Iron Plate",
+        "quantity": {
+          "type": "SkillModified",
+          "skill": "Mechanics",
+          "value": 30
+        }
+      },
+      {
+        "name": "Iron Pipe",
+        "quantity": {
+          "type": "SkillModified",
+          "skill": "Mechanics",
+          "value": 20
+        }
+      },
+      {
+        "name": "Screws",
+        "quantity": {
+          "type": "SkillModified",
+          "skill": "Mechanics",
+          "value": 40
+        }
+      },
+      {
+        "name": "Lumber",
+        "quantity": {
+          "type": "SkillModified",
+          "skill": "Mechanics",
+          "value": 30
+        }
+      },
+      {
+        "name": "Leather Hide",
+        "quantity": {
+          "type": "SkillModified",
+          "skill": "Mechanics",
+          "value": 20
+        }
+      }
+    ]
+  },
+
+  {
+    "products": [
+      {
+        "name": "Mechanical Water Pump",
+        "quantity": 1
+      }
+    ],
+    "ingredients": [
+      {
+        "name": "Iron Bar",
+        "quantity": {
+          "type": "SkillModified",
+          "skill": "Mechanics",
+          "value": 20
+        }
+      },
+      {
+        "name": "Iron Pipe",
+        "quantity": {
+          "type": "SkillModified",
+          "skill": "Mechanics",
+          "value": 30
+        }
+      }
+    ]
+  },
+
+  {
+    "products": [
+      {
+        "name": "Steam Tractor Sower",
+        "quantity": 1
+      }
+    ],
+    "ingredients": [
+      {
+        "name": "Iron Plate",
+        "quantity": {
+          "type": "SkillModified",
+          "skill": "Mechanics",
+          "value": 20
+        }
+      },
+      {
+        "name": "Screws",
+        "quantity": {
+          "type": "SkillModified",
+          "skill": "Mechanics",
+          "value": 20
+        }
+      },
+      {
+        "name": "Iron Pipe",
+        "quantity": {
+          "type": "SkillModified",
+          "skill": "Mechanics",
+          "value": 20
+        }
+      }
+    ]
+  },
+
+  {
+    "products": [
+      {
+        "name": "Steam Tractor Harvester",
+        "quantity": 1
+      }
+    ],
+    "ingredients": [
+      {
+        "name": "Iron Plate",
+        "quantity": {
+          "type": "SkillModified",
+          "skill": "Mechanics",
+          "value": 20
+        }
+      },
+      {
+        "name": "Screws",
+        "quantity": {
+          "type": "SkillModified",
+          "skill": "Mechanics",
+          "value": 20
+        }
+      },
+      {
+        "name": "Iron Pipe",
+        "quantity": {
+          "type": "SkillModified",
+          "skill": "Mechanics",
+          "value": 20
+        }
+      }
+    ]
+  },
+
+  {
+    "products": [
+      {
+        "name": "Steam Tractor Plough",
+        "quantity": 1
+      }
+    ],
+    "ingredients": [
+      {
+        "name": "Iron Plate",
+        "quantity": {
+          "type": "SkillModified",
+          "skill": "Mechanics",
+          "value": 20
+        }
+      },
+      {
+        "name": "Screws",
+        "quantity": {
+          "type": "SkillModified",
+          "skill": "Mechanics",
+          "value": 30
+        }
+      }
+    ]
+  },
+
+  {
+    "products": [
+      {
+        "name": "Steam Engine",
+        "quantity": 1
+      }
+    ],
+    "ingredients": [
+      {
+        "name": "Iron Piston",
+        "quantity": {
+          "type": "SkillModified",
+          "skill": "Mechanics",
+          "value": 30
+        }
+      },
+      {
+        "name": "Screws",
+        "quantity": {
+          "type": "SkillModified",
+          "skill": "Mechanics",
+          "value": 50
+        }
+      },
+      {
+        "name": "Iron Plate",
+        "quantity": {
+          "type": "SkillModified",
+          "skill": "Mechanics",
+          "value": 60
+        }
+      },
+      {
+        "name": "Iron Gear",
+        "quantity": {
+          "type": "SkillModified",
+          "skill": "Mechanics",
+          "value": 40
+        }
+      }
+    ]
+  },
+]
