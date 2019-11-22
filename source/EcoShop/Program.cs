@@ -16,10 +16,38 @@ namespace EcoShop
         {
             await Task.WhenAll(LoadCosts(), LoadRecipes());
 
-            var player = new Player(new[] { new Skill("Mechanics", 0.70M) });
+            var player = new Player(new[]
+            {
+                new Skill("Basic Engineering", 7),//0.80M),
+                new Skill("Mechanics", 7),//0.75M),
+                new Skill("Industry", 2),//0.50M),
+                new Skill("Smelting", 7),//0.80M),
+                //new Skill("Advanced Smelting", 7),//0.80M)
+                //new Skill("Cement", 6),
+                //new Skill("Glassworking", 7)
+            },
+                new string[]
+                {
+                    "BasicEngineeringLavishResourcesTalent",
+                    "MechanicsLavishResourcesTalent"
+                }
+            );
+
+
+            player.PreferedRecipies = new[]
+            {
+                // Iron Gear using Iron Bar
+                _recipes.Single(r => r.Products.Any(p => p.Name == "Iron Gear") && r.Ingredients.Any(i => i.Name == "Iron Bar")),
+
+                // Steel using Coal
+                _recipes.Single(r => r.Products.Any(p => p.Name == "Steel") && r.Ingredients.Any(i => i.Name == "Coal"))
+            };
+
+
 
             var products = new[]
             {
+                "Hand Plough",
                 "Wooden Elevator",
                 "Steam Truck",
                 "Steam Tractor",
@@ -27,7 +55,18 @@ namespace EcoShop
                 "Steam Tractor Sower",
                 "Steam Tractor Harvester",
                 "Steam Tractor Plough",
-                "Steam Engine"
+                "Steam Engine",
+                "Blast Furnace",
+                "Cement Kiln",
+                "Electric Machinist Table",
+                "Asphalt Road",
+                "Asphalt Ramp",
+                "Steel",
+                "Reinforced Concrete",
+                "Framed Glass",
+                "Waste Filter",
+                "Steam Engine",
+                "Electric Water Pump"
             };
 
             foreach (var product in products)
@@ -52,10 +91,21 @@ namespace EcoShop
                 Console.WriteLine();
             }
         }
-        
+
+        private static void Report(Dictionary<string, string> shoppingList)
+        {
+
+        }
+
+        // Imorvments can be made. We cant take the .7 iron bars leftover from recipe and use them in another recipie. Thats what this assumes.
+        // We should actually be able to calculate waste.
         private static void Calculate(Player player, string item, Dictionary<string, decimal> shoppingList, decimal q = 1)
         {
-            var recipe = _recipes.Single(r => r.Products.Any(p => p.Name == item)); // todo: handle the case when multipe recipes match
+            var recipe = player.PreferedRecipies.SingleOrDefault(r => r.Products.Any(p => p.Name == item));
+            
+            if(recipe == null)
+                recipe = _recipes.Single(r => r.Products.Any(p => p.Name == item)); 
+
             var product = recipe.Products.Single(p => p.Name == item);
 
             foreach (var ingredient in recipe.Ingredients)
@@ -87,8 +137,8 @@ namespace EcoShop
 
         private static async Task LoadRecipes()
         {
-            using var stream = File.OpenRead("Recipe.json");
-            _recipes = await JsonSerializer.DeserializeAsync<Recipe[]>(stream, new JsonSerializerOptions { AllowTrailingCommas = true, PropertyNamingPolicy = JsonNamingPolicy.CamelCase, ReadCommentHandling = JsonCommentHandling.Skip });
+            using var stream = File.OpenRead(@"Data\Recipe.json");
+            _recipes = await JsonSerializer.DeserializeAsync<Recipe[]>(stream, new JsonSerializerOptions { AllowTrailingCommas = true, ReadCommentHandling = JsonCommentHandling.Skip });
         }
     }
 }

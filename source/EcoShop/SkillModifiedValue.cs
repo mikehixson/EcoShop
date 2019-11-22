@@ -1,19 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace EcoShop
 {
     public class SkillModifiedValue : IValue
     {
         public string Skill { get; set; }
-        public decimal Value { get; set; }
+        public decimal[] Values { get; set; }
 
         public decimal Compute(Player player)
         {
-            var skillFactor = player.SkillFactor(Skill);
+            var skill = player.Skills.SingleOrDefault(s => s.Name == Skill);
 
-            return Value * skillFactor;
+            if (skill == null)
+                return Values[0];
+
+            return Values[skill.Level];
         }
     }
 }

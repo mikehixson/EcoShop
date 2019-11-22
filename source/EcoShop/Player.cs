@@ -8,20 +8,14 @@ namespace EcoShop
     public class Player
     {
         public Skill[] Skills { get; }
+        public string[] Talents { get; }
 
-        public Player(Skill[] skills)
+        public Recipe[] PreferedRecipies { get; set; }
+
+        public Player(Skill[] skills, string[] talents)
         {
             Skills = skills;
-        }
-
-        public decimal SkillFactor(string skillName)
-        {
-            var skill = Skills.SingleOrDefault(s => s.Name == skillName);
-
-            if (skill == null)
-                return 1;
-
-            return 1 - skill.Benefit;
+            Talents = talents;
         }
     }
 }

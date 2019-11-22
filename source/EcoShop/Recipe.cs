@@ -8,5 +8,7 @@ namespace EcoShop
     {
         public Item[] Products { get; set; }
         public Item[] Ingredients { get; set; }
+        public string[] Tables { get; set; }
+        public string[] Skills { get; set; }
     }
 }

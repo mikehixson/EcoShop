@@ -9,7 +9,7 @@ namespace EcoShop
     {
         public string Name { get; set; }
 
-        [JsonConverter(typeof(ValueJsonConverter))]
+        [JsonConverter(typeof(ValueJsonConverter2))]
         public IValue Quantity { get; set; }
     }
 }

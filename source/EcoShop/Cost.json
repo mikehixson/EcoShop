@@ -1,11 +1,19 @@
 [
   {
+    "name": "Hewn Log",
+    "amount": 0.20
+  },
+  {
+    "name": "Board",
+    "amount": 0.15
+  },
+  {
     "name": "Iron Bar",
     "amount": 5
   },
   {
     "name": "Iron Pipe",
-    "amount": 4
+    "amount": 2.80
   },
   {
     "name": "Lumber",
@@ -13,10 +21,38 @@
   },
   {
     "name": "Cellulose Fiber",
-    "amount": 0.25
+    "amount": 0.50
   },
   {
     "name": "Leather Hide",
-    "amount": 0.2
+    "amount": 0.20
+  },
+  {
+    "name": "Brick",
+    "amount": 1.25
+  },
+  {
+    "name": "Steel",
+    "amount": 11.5
+  },
+  {
+    "name": "Stone",
+    "amount": 0.01
+  },
+  {
+    "name": "Concrete",
+    "amount": 0.40
+  },
+  {
+    "name": "Coal",
+    "amount": 0.60
+  },
+  {
+    "name": "Limestone",
+    "amount": 0.01
+  },
+  {
+    "name": "Glass",
+    "amount": 0.25
   }
 ]

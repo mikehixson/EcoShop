@@ -7,12 +7,12 @@ namespace EcoShop
     public class Skill
     {
         public string Name { get; }
-        public decimal Benefit { get; }
+        public int Level { get; }
 
-        public Skill(string name, decimal benefit)
+        public Skill(string name, int level)
         {
             Name = name;
-            Benefit = benefit;
+            Level = level;  // todo: validate range?
         }
     }
 }
