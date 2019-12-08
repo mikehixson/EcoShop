@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EcoShop.DynamicValue;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -9,7 +10,7 @@ namespace EcoShop
     {
         public string Name { get; set; }
 
-        [JsonConverter(typeof(ValueJsonConverter2))]
-        public IValue Quantity { get; set; }
+        [JsonConverter(typeof(DynamicValueJsonConverter))]
+        public IDynamicValue Quantity { get; set; }
     }
 }

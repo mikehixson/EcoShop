@@ -6,17 +6,18 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Linq;
+using EcoShop.DynamicValue;
 
 namespace EcoShop
 {
-    public class ValueJsonConverter2 : JsonConverter<IValue>
+    public class DynamicValueJsonConverter : JsonConverter<IDynamicValue>
     {
         public override bool CanConvert(Type typeToConvert)
         {
-            return typeof(IValue).IsAssignableFrom(typeToConvert);
+            return typeof(IDynamicValue).IsAssignableFrom(typeToConvert);
         }
 
-        public override IValue Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override IDynamicValue Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             if (reader.TokenType != JsonTokenType.StartObject)
                 throw new JsonException();
@@ -26,12 +27,12 @@ namespace EcoShop
             return Convert(dynamicValue);
         }
 
-        private IValue Convert(DynamicValue dynamicValue)
+        private IDynamicValue Convert(DynamicValue dynamicValue)
         {
             switch (dynamicValue.Type)
             {
                 case "ConstantValue":
-                    return new BasicValue { Value = dynamicValue.Values[0] };
+                    return new ConstantValue { Value = dynamicValue.Values[0] };
 
                 case "SkillModifiedValue":
                     return new SkillModifiedValue { Skill = dynamicValue.ModifierName, Values = dynamicValue.Values };
@@ -40,19 +41,19 @@ namespace EcoShop
                     return new TalentModifiedValue { Talent = dynamicValue.ModifierName, Values = dynamicValue.Values };
 
                 case "MultiDynamicValue":
-                    return new MultiDynamicValue { Operation = dynamicValue.Operation, Children = dynamicValue.Children.Select(c => Convert(c)).ToArray() };
+                    return new MultiDynamicValue { Operation = dynamicValue.Operation, Children = dynamicValue.Children.Select(c => Convert(c)).ToList() };
             }
 
             throw new Exception($"Unexpected DynamicValue Type: {dynamicValue.Type}.");
         }
 
-        public override void Write(Utf8JsonWriter writer, IValue value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, IDynamicValue value, JsonSerializerOptions options)
         {
             //todo:
 
             switch (value)
             {
-                case BasicValue v:
+                case ConstantValue v:
                     writer.WriteNumberValue(v.Value);
                     break;
 

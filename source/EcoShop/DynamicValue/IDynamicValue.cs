@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace EcoShop
+namespace EcoShop.DynamicValue
 {
-    public interface IValue
+    public interface IDynamicValue
     {
         decimal Compute(Player player);
     }

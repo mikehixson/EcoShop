@@ -1,58 +1,109 @@
 [
   {
-    "name": "Hewn Log",
+    "name": "Raw Meat",
     "amount": 0.20
   },
-  {
-    "name": "Board",
-    "amount": 0.15
-  },
-  {
-    "name": "Iron Bar",
-    "amount": 5
-  },
-  {
-    "name": "Iron Pipe",
-    "amount": 2.80
-  },
-  {
-    "name": "Lumber",
-    "amount": 1.25
-  },
-  {
-    "name": "Cellulose Fiber",
-    "amount": 0.50
-  },
-  {
-    "name": "Leather Hide",
-    "amount": 0.20
-  },
-  {
-    "name": "Brick",
-    "amount": 1.25
-  },
-  {
-    "name": "Steel",
-    "amount": 11.5
-  },
-  {
-    "name": "Stone",
-    "amount": 0.01
-  },
-  {
-    "name": "Concrete",
-    "amount": 0.40
-  },
-  {
-    "name": "Coal",
-    "amount": 0.60
-  },
-  {
-    "name": "Limestone",
-    "amount": 0.01
-  },
-  {
-    "name": "Glass",
-    "amount": 0.25
-  }
+
+
+  //{
+  //  "name": "Hewn Log",
+  //  "amount": 0.20
+  //},
+  //{
+  //  "name": "Board",
+  //  "amount": 0.15
+  //},
+  //{
+  //  "name": "Iron Bar",
+  //  "amount": 5
+  //},
+  //{
+  //  "name": "Copper Bar",
+  //  "amount": 7
+  //},
+  //{
+  //  "name": "Gold Bar",
+  //  "amount": 10
+  //},
+  //{
+  //  "name": "Iron Pipe",
+  //  "amount": 2.80
+  //},
+  //{
+  //  "name": "Lumber",
+  //  "amount": 1.25
+  //},
+  //{
+  //  "name": "Cellulose Fiber",
+  //  "amount": 0.50
+  //},
+  //{
+  //  "name": "Leather Hide",
+  //  "amount": 0.20
+  //},
+  //{
+  //  "name": "Brick",
+  //  "amount": 1.25
+  //},
+  //{
+  //  "name": "Steel",
+  //  "amount": 11.5
+  //},
+  //{
+  //  "name": "Stone",
+  //  "amount": 0.01
+  //},
+  //{
+  //  "name": "Concrete",
+  //  "amount": 0.40
+  //},
+  //{
+  //  "name": "Coal",
+  //  "amount": 0.60
+  //},
+  //{
+  //  "name": "Limestone",
+  //  "amount": 0.01
+  //},
+  //{
+  //  "name": "Glass",
+  //  "amount": 0.15
+  //},
+  //{
+  //  "name": "Rivet",
+  //  "amount": 1.40
+  //},
+  //{
+  //  "name": "Tallow",
+  //  "amount": 0.05
+  //},
+  //{
+  //  "name": "Steel Pipe",
+  //  "amount": 8.40
+  //},
+  //{
+  //  "name": "Framed Glass",
+  //  "amount": 30
+  //},
+  //{
+  //  "name": "Circuit",
+  //  "amount": -1000
+  //},
+  //{
+  //  "name": "Fiberglass",
+  //  "amount": 12
+  //},
+  //{
+  //  "name": "Substrate",
+  //  "amount": 36
+  //},
+  //{
+  //  "name": "Epoxy",
+  //  "amount": 4
+  //},
+  //{
+  //  "name": "Fiberglass",
+  //  "amount": 8
+  //}
+
 ]

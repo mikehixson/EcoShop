@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 
-namespace EcoShop
+namespace EcoShop.DynamicValue
 {
-    public class SkillModifiedValue : IValue
+    public class SkillModifiedValue : IDynamicValue
     {
         public string Skill { get; set; }
         public decimal[] Values { get; set; }

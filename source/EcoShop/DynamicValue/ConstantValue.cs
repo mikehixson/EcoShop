@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace EcoShop
+namespace EcoShop.DynamicValue
 {
-    public class BasicValue : IValue
+    public class ConstantValue : IDynamicValue
     {
         public decimal Value { get; set; }
 

@@ -7,15 +7,15 @@ namespace EcoShop
 {
     public class Player
     {
-        public Skill[] Skills { get; }
-        public string[] Talents { get; }
+        public List<Skill> Skills { get; }
+        public List<string> Talents { get; }
 
-        public Recipe[] PreferedRecipies { get; set; }
+        //public Recipe[] PreferedRecipies { get; set; }
 
-        public Player(Skill[] skills, string[] talents)
+        public Player()
         {
-            Skills = skills;
-            Talents = talents;
+            Talents = new List<string>();
+            Skills = new List<Skill>();
         }
     }
 }
