@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Text.Json;
 using System.Linq;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.IO;
-using System.Collections;
 using EcoShop.DynamicValue;
 using EcoShop.RecipeFilter;
 
@@ -134,11 +130,16 @@ namespace EcoShop
 
             foreach (var product in products)
             {
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine(product);
+                Console.ResetColor();
 
-                var partsList = calculator.Calculate(product, count);
+                var partsList = calculator.CalculateTemp(product, count);
                 Report(gameContext, partsList);
+                Console.WriteLine();
 
+                ReportUnused(partsList);
+                Console.WriteLine();
                 Console.WriteLine();
             }
         }
@@ -148,7 +149,7 @@ namespace EcoShop
             var amount = 0M;
             foreach (var item in partsList)
             {
-                var cost = context.Costs.Single(c => c.Name == item.Name);
+                var cost = context.Costs.SingleOrDefault(c => c.Name == item.Name) ?? new ItemCost { Amount = 0 };
 
                 var itemTotal = Math.Ceiling(item.Amount) * cost.Amount;
                 amount += itemTotal;
@@ -159,200 +160,13 @@ namespace EcoShop
             Console.WriteLine("{0,36}", $"Total: {amount,7:0.00}");
 
         }
-    }
 
-
-    public class GameContext : IGameContext
-    {
-        public RecipeStore Recipes { get; private set; }
-        public IEnumerable<ItemCost> Costs { get; private set; }
-
-        public Player Player { get; set; }
-
-        public GameContext()
+        private static void ReportUnused(PartsList partsList)
         {
-
-        }
-
-        public async Task Initialize()
-        {
-            await Task.WhenAll(LoadCosts(), LoadRecipes());
-        }
-
-        private async Task LoadRecipes()
-        {
-            using var stream = File.OpenRead(@"Data\Recipe.json");
-            var recipes = await JsonSerializer.DeserializeAsync<Recipe[]>(stream, new JsonSerializerOptions { AllowTrailingCommas = true, ReadCommentHandling = JsonCommentHandling.Skip });
-
-            Recipes = new RecipeStore(recipes);
-        }
-
-        private async Task LoadCosts()
-        {
-            using var stream = File.OpenRead("Cost.json");
-
-            Costs = await JsonSerializer.DeserializeAsync<ItemCost[]>(stream, new JsonSerializerOptions { AllowTrailingCommas = true, PropertyNamingPolicy = JsonNamingPolicy.CamelCase, ReadCommentHandling = JsonCommentHandling.Skip });
-        }
-    }
-
-    public class CalculatorA
-    {
-        private readonly IGameContext _gameContext;
-
-        public CalculatorA(IGameContext gameContext)
-        {
-            _gameContext = gameContext;
-        }
-
-        // The specification cant just be "Is this Recipe valid". It must be "Is this recipe valid to make x"
-
-        public PartsList Calculate(string item, decimal quantity = 1)
-        {
-            var preferred = new PreferredFilter();
-
-            // Iron Gear using Iron Bar
-            preferred.Add("Iron Gear", _gameContext.Recipes.GetRecipes(r => r.Products.Any(p => p.Name == "Iron Gear") && r.Ingredients.Any(i => i.Name == "Iron Bar")).Single());
-
-            // Steel using Coal
-            preferred.Add("Steel", _gameContext.Recipes.GetRecipes(r => r.Products.Any(p => p.Name == "Steel") && r.Ingredients.Any(i => i.Name == "Coal")).Single());
-
-            // Scrap Meat using Raw Meat
-            preferred.Add("Scrap Meat", _gameContext.Recipes.GetRecipes(r => r.Products.All(p => p.Name == "Scrap Meat") && r.Ingredients.Any(i => i.Name == "Raw Meat")).Single());
-
-            // Sugar
-            preferred.Add("Sugar", _gameContext.Recipes.GetRecipes(r => r.Products.Any(p => p.Name == "Sugar")).First());
-
-            // Vegetable Medley            
-            preferred.Add("Vegetable Medley", _gameContext.Recipes.GetRecipes(r => r.Products.Any(p => p.Name == "Vegetable Medley")).First());
-
-            // Fruit Salad
-            preferred.Add("Fruit Salad", _gameContext.Recipes.GetRecipes(r => r.Products.Any(p => p.Name == "Fruit Salad")).First());
-
-            // Basic Salad
-            preferred.Add("Basic Salad", _gameContext.Recipes.GetRecipes(r => r.Products.Any(p => p.Name == "Basic Salad")).First());
-
-            // Tallow
-            preferred.Add("Tallow", _gameContext.Recipes.GetRecipes(r => r.Products.Any(p => p.Name == "Tallow")).First());
-
-            // Leather Hide
-            preferred.Add("Leather Hide", _gameContext.Recipes.GetRecipes(r => r.Products.Any(p => p.Name == "Leather Hide")).First());
-
-            // Fur Pelt
-            preferred.Add("Fur Pelt", _gameContext.Recipes.GetRecipes(r => r.Products.Any(p => p.Name == "Fur Pelt")).First());
-
-
-            var filter = new CompositeFilter
-                (
-                    new ProductFilter(),
-                    preferred
-                );
-
-
-            var partsList = new PartsList();
-
-            Calculate(item, partsList, filter, quantity);
-
-            return partsList;
-        }
-
-        // Imorvments can be made. We cant take the .7 iron bars leftover from recipe and use them in another recipie. Thats what this assumes.
-        // We should actually be able to calculate waste.
-        // It looks like Arrows are an example of less effency with more levels.
-        private void Calculate(string item, PartsList shoppingList, IRecipeFilter filter, decimal q = 1)
-        {
-            //var recipe = _gameContext.Recipes.GetRecipe(new CompositeSpecification(new[] { recipeSpecification, new ItemNameSpecification(item, r => r.Products) }));
-            var recipes = _gameContext.Recipes.GetRecipes(item, filter);
-
-            if (!recipes.Any())
-                return; // Item cant be crafted with a recipe.. Iron Ore etc..
-
-            if (recipes.Count() > 1)
-                throw new Exception($"Multiple recipes were found that produce {item}.");
-
-            var recipe = recipes.Single();
-            var product = recipe.Products.Single(p => p.Name == item);
-
-            foreach (var ingredient in recipe.Ingredients)
+            foreach (var item in partsList.Unused)
             {
-                // Sometimes a recipe creates more than 1
-                var quantity = (ingredient.Quantity.Compute(_gameContext.Player) / product.Quantity.Compute(_gameContext.Player)) * q;
-
-                // todo: handle the case when recipe creates 2 distinct products. Handle the case where both products are used in the main thinkg being built
-
-                var cost = _gameContext.Costs.SingleOrDefault(c => c.Name == ingredient.Name);
-
-                if (cost != null)
-                {
-                    shoppingList.Increment(ingredient.Name, quantity);
-                }
-                else
-                {
-                    Calculate(ingredient.Name, shoppingList, filter, quantity);
-                }
+                Console.WriteLine($"{item.Name,-20} {item.Amount,7:0.00}");
             }
-        }
-    }
-
-    public class PartsList : IEnumerable<PartsListItem>
-    {
-        private readonly Dictionary<string, PartsListItem> _index;
-
-        public PartsList()
-        {
-            _index = new Dictionary<string, PartsListItem>();
-        }
-
-        public void Increment(string name, decimal amount)
-        {
-            if (!_index.TryGetValue(name, out var item))
-            {
-                item = new PartsListItem(name);
-                _index.Add(name, item);
-            }
-
-            item.Increment(amount);
-        }
-
-        public void Decrement(string name, decimal amount)
-        {
-            if (!_index.TryGetValue(name, out var item))
-            {
-                item = new PartsListItem(name);
-                _index.Add(name, item);
-            }
-
-            item.Decrement(amount);
-        }
-
-        public IEnumerator<PartsListItem> GetEnumerator()
-        {
-            return _index.Values.GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
-    }
-
-    public class PartsListItem
-    {
-        public string Name { get; }
-        public decimal Amount { get; private set; }
-
-        public PartsListItem(string name)
-        {
-            Name = name;
-        }
-
-        public void Increment(decimal amount)
-        {
-            Amount += amount;
-        }
-
-        public void Decrement(decimal amount)
-        {
-            Amount -= amount;
         }
     }
 }

@@ -24,21 +24,5 @@ namespace EcoShop.UnitTest.DynamicValue
 
             Assert.Equal(expected, value);
         }
-
-        [Fact]
-        public void Compute_PlayerWithSkillLevel1_ReturnsValueIndex1()
-        {
-            var player = new Player()
-            {
-                Skills = { new Skill("Smelting", 1) },
-            };
-
-            var dynamicValue = TestMultiDynamicValue.SmeltingAndSmeltingLavish;
-            var value = dynamicValue.Compute(player);
-
-            var expected = ((SkillModifiedValue)dynamicValue.Children[0]).Values[1];
-
-            Assert.Equal(expected, value);
-        }
     }
 }

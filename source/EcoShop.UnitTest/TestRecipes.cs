@@ -11,6 +11,9 @@ namespace EcoShop.UnitTest
         public static Recipe IronGearFromIronBar { get; }
         public static Recipe IronGearFromSteel { get; }
         public static Recipe Brazier { get; }
+        public static Recipe PreparedMeat { get; }
+        public static Recipe MeatStock { get; }
+        public static Recipe SimmeredMeat { get; }
 
         static TestRecipes()
         {
@@ -36,7 +39,7 @@ namespace EcoShop.UnitTest
                         Name = "Iron Ore",
                         Quantity = new MultiDynamicValue
                         {
-                            Children = 
+                            Children =
                             {
                                 new SkillModifiedValue
                                 {
@@ -176,6 +179,144 @@ namespace EcoShop.UnitTest
                 Skills = new[]
                 {
                     new Skill("Smelting", 2)
+                }
+            };
+
+            PreparedMeat = new Recipe
+            {
+                Products = new[]
+                {
+                    new Item { Name = "Prepared Meat", Quantity = new ConstantValue { Value = 1 } },
+                    new Item { Name = "Scrap Meat", Quantity = new ConstantValue { Value = 2 } }
+                },
+                Ingredients = new[]
+                {
+                    new Item
+                    {
+                        Name = "Raw Meat",
+                        Quantity = new MultiDynamicValue
+                        {
+                            Children =
+                            {
+                                new SkillModifiedValue
+                                {
+                                    Skill = "Butchery",
+                                    Values = new[] { 10.0M, 5.0M, 4.5M, 4.0M, 3.5M, 3.0M, 2.5M, 2.0M }
+                                },
+                                new TalentModifiedValue
+                                {
+                                    Talent = "ButcheryLavishResourcesTalent",
+                                    Values = new [] { 1.0M, 0.9M }
+                                }
+                            }
+                        }
+                    }
+                },
+                Tables = new[]
+                {
+                    "Butchery Table"
+                },
+                Skills = new[]
+                {
+                    new Skill("Butchery", 1)
+                }
+            };
+
+            MeatStock = new Recipe
+            {
+                Products = new[]
+                {
+                    new Item { Name = "Meat Stock", Quantity = new ConstantValue { Value = 1 } },
+                },
+                Ingredients = new[]
+                {
+                    new Item
+                    {
+                        Name = "Scrap Meat",
+                        Quantity = new MultiDynamicValue
+                        {
+                            Children =
+                            {
+                                new SkillModifiedValue
+                                {
+                                    Skill = "Cooking",
+                                    Values = new[] { 20.0M, 10.0M, 9.0M, 8.0M, 7.0M, 6.0M, 5.0M, 4.0M }
+                                },
+                                new TalentModifiedValue
+                                {
+                                    Talent = "CookingLavishResourcesTalent",
+                                    Values = new [] { 1.0M, 0.9M }
+                                }
+                            }
+                        }
+                    }
+                },
+                Tables = new[]
+                {
+                    "Cast Iron Stove"
+                },
+                Skills = new[]
+                {
+                    new Skill("Cooking", 1)
+                }
+            };
+
+            SimmeredMeat = new Recipe
+            {
+                Products = new[]
+                {
+                    new Item { Name = "Simmered Meat", Quantity = new ConstantValue { Value = 1 } },
+                },
+                Ingredients = new[]
+                {
+                    new Item
+                    {
+                        Name = "Prepared Meat",
+                        Quantity = new MultiDynamicValue
+                        {
+                            Children =
+                            {
+                                new SkillModifiedValue
+                                {
+                                    Skill = "Cooking",
+                                    Values = new[] { 5.0M, 2.5M, 2.25M, 2.0M, 1.75M, 1.5M, 1.25M, 1.0M }
+                                },
+                                new TalentModifiedValue
+                                {
+                                    Talent = "CookingLavishResourcesTalent",
+                                    Values = new[] { 1.0M, 0.9M }
+                                }
+                            }
+                        }
+                    },
+                    new Item
+                    {
+                        Name = "Meat Stock",
+                        Quantity = new MultiDynamicValue
+                        {
+                            Children =
+                            {
+                                new SkillModifiedValue
+                                {
+                                    Skill = "Cooking",
+                                    Values = new[] { 2.0M, 1.0M, 0.9M, 0.8M, 0.7M, 0.6M, 0.5M, 0.4M }
+                                },
+                                new TalentModifiedValue
+                                {
+                                    Talent = "CookingLavishResourcesTalent",
+                                    Values = new[] { 1.0M, 0.9M }
+                                }
+                            }
+                        }
+                    }
+                },
+                Tables = new[]
+                {
+                    "Cast Iron Stove"
+                },
+                Skills = new[]
+                {
+                    new Skill("Cooking", 2)
                 }
             };
         }

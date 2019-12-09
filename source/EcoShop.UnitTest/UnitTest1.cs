@@ -13,13 +13,7 @@ namespace EcoShop.UnitTest
         [Fact]
         public async Task Test1()
         {
-            var context = new TestGameContext();
 
-            using var stream = File.OpenRead(@"Data\Recipe.json");
-            context.Recipes = await JsonSerializer.DeserializeAsync<Recipe[]>(stream, new JsonSerializerOptions { AllowTrailingCommas = true, ReadCommentHandling = JsonCommentHandling.Skip });
-
-
-            var store = new RecipeStore(context.Recipes);
 
 
         }

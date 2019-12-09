@@ -8,18 +8,17 @@ namespace EcoShop.UnitTest
 {
     public class TestGameContext : IGameContext
     {
-        public IEnumerable<Recipe> Recipes { get; set; }
+        //public IEnumerable<Recipe> Recipes { get; set; }
 
         public IEnumerable<ItemCost> Costs { get; set; }
 
-        RecipeStore IGameContext.Recipes => throw new NotImplementedException();
+        public RecipeStore Recipes { get; set; }
 
-        public Player Player => throw new NotImplementedException();
+        public Player Player { get; set; }
 
         public TestGameContext()
         {
-            using var stream = File.OpenRead(@"Data\Recipe.json");
-            Recipes = JsonSerializer.DeserializeAsync<Recipe[]>(stream, new JsonSerializerOptions { AllowTrailingCommas = true, ReadCommentHandling = JsonCommentHandling.Skip }).Result;
+            Costs = new List<ItemCost>();
         }
     }
 }
