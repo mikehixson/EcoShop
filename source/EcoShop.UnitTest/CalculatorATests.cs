@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xunit;
 using System.Linq;
+using EcoShop.RecipeFilter;
 
 namespace EcoShop.UnitTest
 {
@@ -112,37 +113,85 @@ namespace EcoShop.UnitTest
 
         //todo: test RecipeProducesMultipleOfRequiredItem We dont consume all. -- remainder goes to unused
         //todo: test RecipeProducesMultipleItems -- all of unused item goes to unused
-        
+        //todo: test exception for multiple recipe match
+
         // Building 1 Simmered Meat
         // We need 40 (2 x 20) total Scrap Meat for the 2 Meat Stock 
         // We need 5 Prepared Meat, which also produces 10 (5 x 2) Scrap Meat
         // To ge the additional 30 Scrap Meat we should see 15 more Prepared Meat created
+
+        // Building 1 Simmered Meat
+        // We need 40 (2 x 20) total Scrap Meat for the 2 Meat Stock 
+        // We need 5 Prepared Meat, which also produces 10 (5 x 2) Scrap Meat
+        // To ge the additional 30 Scrap Meat we the Scrap Meat from Raw Meat recipe, which takes 30 Raw Meat
         [Fact]
         public void Calculate_UnusedItems_Consumed()
         {
+            var simmeredMeat = new Recipe
+            {
+                Products = TestRecipes.SimmeredMeat.Products,
+                Ingredients = TestRecipes.SimmeredMeat.Ingredients.Reverse().ToArray(),
+                Skills = TestRecipes.SimmeredMeat.Skills,
+                Tables = TestRecipes.SimmeredMeat.Tables
+            };
+
+            //simmeredMeat = TestRecipes.SimmeredMeat;
+
             var context = new TestGameContext
             {
                 Player = new Player(),
-                Recipes = new RecipeStore(new[] { TestRecipes.SimmeredMeat, TestRecipes.PreparedMeat, TestRecipes.MeatStock })
+                Recipes = new RecipeStore(new[] { simmeredMeat, TestRecipes.PreparedMeat, TestRecipes.MeatStock, TestRecipes.ScrapMeat })
             };
 
-            var calculator = new CalculatorA(context);
-            var parts = calculator.Calculate("Simmered Meat");
+            var filter = new PreferredFilter();
 
-            
+            // Scrap Meat using Raw Meat
+            filter.Add("Scrap Meat", TestRecipes.ScrapMeat);
+
+            var calculator = new CalculatorA(context);
+            var parts = calculator.Calculate("Simmered Meat", 1, filter);
+
+
             // Todo: these assertions should change when we move beyond just tracking unused, to try to use the unused.
+            //var preparedMeat = Assert.Single(parts, p => p.Name == "Prepared Meat");
+            //Assert.Equal(5, preparedMeat.Amount);
+
+            //var preparedMeatUnused = Assert.Single(parts.Unused, p => p.Name == "Scrap Meat");
+            //Assert.Equal(10, preparedMeatUnused.Amount);
+
+
+            //var scrapMeat = Assert.Single(parts, p => p.Name == "Scrap Meat");
+            //Assert.Equal(40, scrapMeat.Amount);
+
+            //var scrapMeatUnused = Assert.Single(parts.Unused, p => p.Name == "Prepared Meat");
+            //Assert.Equal(20, scrapMeatUnused.Amount);
+
+
+            // When Simmered Meat recipe has Prepared Meat First OR Prepared Meat is the preferred recipe to create Scrap Meat
+            //var preparedMeat = Assert.Single(parts, p => p.Name == "Prepared Meat");
+            //Assert.Equal(5, preparedMeat.Amount);
+ 
+            //var scrapMeat = Assert.Single(parts, p => p.Name == "Scrap Meat");
+            //Assert.Equal(40, scrapMeat.Amount);
+
+            //var scrapMeatUnused = Assert.Single(parts.Unused, p => p.Name == "Prepared Meat");
+            //Assert.Equal(15, scrapMeatUnused.Amount);
+
+
+
+
+            // When Simmered Meat recipe has Prepared Meat Last AND Raw Meat is the preferred recipe to create Scrap Meat
+            // Whith smart ordering we should not have any unused
             var preparedMeat = Assert.Single(parts, p => p.Name == "Prepared Meat");
             Assert.Equal(5, preparedMeat.Amount);
-
-            var preparedMeatUnused = Assert.Single(parts.Unused, p => p.Name == "Scrap Meat");
-            Assert.Equal(10, preparedMeatUnused.Amount);
-
 
             var scrapMeat = Assert.Single(parts, p => p.Name == "Scrap Meat");
             Assert.Equal(40, scrapMeat.Amount);
 
-            var scrapMeatUnused = Assert.Single(parts.Unused, p => p.Name == "Prepared Meat");
-            Assert.Equal(20, scrapMeatUnused.Amount);
+            // From creating the Prepared Meat last
+            var scrapMeatUnused = Assert.Single(parts.Unused, p => p.Name == "Scrap Meat");
+            Assert.Equal(10, scrapMeatUnused.Amount);
+
         }
 
 

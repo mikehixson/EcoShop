@@ -52,6 +52,15 @@ namespace EcoShop
             // Fur Pelt
             preferred.Add("Fur Pelt", _gameContext.Recipes.GetRecipes(r => r.Products.Any(p => p.Name == "Fur Pelt")).First());
 
+            // Oil
+            preferred.Add("Oil", _gameContext.Recipes.GetRecipes(r => r.Products.Any(p => p.Name == "Oil")).First());
+
+            // Cereal Germ
+            preferred.Add("Cereal Germ", _gameContext.Recipes.GetRecipes(r => r.Products.Any(p => p.Name == "Cereal Germ")).First());
+
+
+
+
 
             var filter = new CompositeFilter
                 (
@@ -67,12 +76,17 @@ namespace EcoShop
             return partsList;
         }
 
-        public PartsList Calculate(string item, decimal quantity = 1)
+        public PartsList Calculate(string item, decimal quantity = 1, IRecipeFilter filter = null)
         {
+
+            if (filter != null)
+                filter = new CompositeFilter(new ProductFilter(), filter);
+            else
+                filter = new ProductFilter();
 
             var partsList = new PartsList();
 
-            Calculate(item, partsList, new ProductFilter(), quantity);
+            Calculate(item, partsList, filter, quantity);
 
             return partsList;
         }
@@ -83,6 +97,12 @@ namespace EcoShop
         // Handle the case where both products are used in the main thinkg being built
         private void Calculate(string item, PartsList shoppingList, IRecipeFilter filter, decimal q = 1)
         {
+            // Take from our unused first
+            q = shoppingList.Consume(item, q);
+
+            if (q == 0)
+                return;
+
             var recipes = _gameContext.Recipes.GetRecipes(item, filter);
 
             if (!recipes.Any())
@@ -93,8 +113,7 @@ namespace EcoShop
 
             var recipe = recipes.Single();
             var principal = recipe.Products.Single(p => p.Name == item);
-
-
+                       
             // q = how many we need, count = how many times this recipe must be executed.
             var count = q / principal.Quantity.Compute(_gameContext.Player);
 

@@ -19,7 +19,8 @@ namespace EcoShop
                 Skills =
                 {
                     new Skill("Butchery", 7),
-                    new Skill("Cooking", 3),
+                    new Skill("Cooking", 5),
+                    new Skill("Advanced Cooking", 1),
                     //new Skill("Mechanics", 7),
                     //new Skill("Industry", 4),
                     //new Skill("Electronics", 7),
@@ -40,7 +41,7 @@ namespace EcoShop
 
             // Find all recipes where skills provide a benefit
             var products = gameContext.Recipes.GetRecipes(r => true)
-                .Where(r => r.Ingredients.Any(i => new string[] { "Butchery", "Cooking" }.Contains(Skm(i.Quantity)?.Skill)))
+                .Where(r => r.Ingredients.Any(i => new string[] { "Butchery", "Cooking", "Advanced Cooking" }.Contains(Skm(i.Quantity)?.Skill)))
                 .SelectMany(r => r.Products)
                 .Select(p => p.Name)
                 .Distinct()

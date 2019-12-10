@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections;
+using System;
 
 namespace EcoShop
 {
@@ -35,6 +36,22 @@ namespace EcoShop
         public void DecrementUnused(string name, decimal amount)
         {
             Decrement(_unused, name, amount);
+        }
+
+        public decimal Consume(string name, decimal amount)
+        {
+            if (_unused.TryGetValue(name, out var item))
+            {
+                var consume = Math.Min(item.Amount, amount);
+                item.Decrement(consume);
+
+                if (item.Amount == 0)
+                    _unused.Remove(name);
+
+                return amount - consume;
+            }
+
+            return amount;
         }
 
         private void Increment(Dictionary<string, PartsListItem>collection, string name, decimal amount)

@@ -14,6 +14,7 @@ namespace EcoShop.UnitTest
         public static Recipe PreparedMeat { get; }
         public static Recipe MeatStock { get; }
         public static Recipe SimmeredMeat { get; }
+        public static Recipe ScrapMeat { get; }
 
         static TestRecipes()
         {
@@ -317,6 +318,37 @@ namespace EcoShop.UnitTest
                 Skills = new[]
                 {
                     new Skill("Cooking", 2)
+                }
+            };
+
+            ScrapMeat = new Recipe
+            {
+                Products = new[]
+                {
+                    new Item { Name = "Scrap Meat", Quantity = new ConstantValue { Value = 1 } },
+                },
+                Ingredients = new[]
+                {
+                    new Item
+                    {
+                        Name = "Raw Meat",
+                        Quantity = new MultiDynamicValue
+                        {
+                            Children =
+                            {
+                                new SkillModifiedValue
+                                {
+                                    Skill = "Butchery",
+                                    Values = new[] { 1.0M, 0.5M, 0.45M, 0.4M, 0.35M, 0.3M, 0.25M, 0.2M }
+                                },
+                                new TalentModifiedValue
+                                {
+                                    Talent = "ButcheryLavishResourcesTalent",
+                                    Values = new[] { 1.0M, 0.9M }
+                                }
+                            }
+                        }
+                    }
                 }
             };
         }
