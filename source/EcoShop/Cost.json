@@ -3,7 +3,34 @@
     "name": "Raw Meat",
     "amount": 0.20
   },
-
+  {
+    "name": "Scrap Meat",
+    "amount": 0.10
+  },
+  {
+    "name": "Huckleberries",
+    "amount": 0.10
+  },
+  {
+    "name": "Tallow",
+    "amount": 0.05
+  },
+  {
+    "name": "Beet",
+    "amount": 0.10
+  },
+  {
+    "name": "Tomato",
+    "amount": 0.10
+  },
+  {
+    "name": "Beans",
+    "amount": 0.10
+  },
+  {
+    "name": "Corn",
+    "amount": 0.10
+  }
 
   //{
   //  "name": "Hewn Log",

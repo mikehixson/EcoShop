@@ -19,8 +19,8 @@ namespace EcoShop
                 Skills =
                 {
                     new Skill("Butchery", 7),
-                    new Skill("Cooking", 5),
-                    new Skill("Advanced Cooking", 1),
+                    new Skill("Cooking", 7),
+                    new Skill("Advanced Cooking", 3),
                     //new Skill("Mechanics", 7),
                     //new Skill("Industry", 4),
                     //new Skill("Electronics", 7),
@@ -29,6 +29,7 @@ namespace EcoShop
                 Talents =
                 {
                     "ButcheryLavishResourcesTalent",
+                    "CookingLavishResourcesTalent"
                     //"BasicEngineeringLavishResourcesTalent",
                     //"MechanicsLavishResourcesTalent"
                 }
@@ -77,7 +78,8 @@ namespace EcoShop
                 "Raw Bacon",
                 "Raw Roast",
                 "Raw Sausage",
-                "Simmered Meat",               
+                "Simmered Meat",
+                "Bear S U P R E M E",
 
 
                 //"Hand Plough",

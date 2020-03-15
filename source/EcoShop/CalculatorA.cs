@@ -44,7 +44,7 @@ namespace EcoShop
             preferred.Add("Basic Salad", _gameContext.Recipes.GetRecipes(r => r.Products.Any(p => p.Name == "Basic Salad")).First());
 
             // Tallow
-            preferred.Add("Tallow", _gameContext.Recipes.GetRecipes(r => r.Products.Any(p => p.Name == "Tallow")).First());
+            preferred.Add("Tallow", _gameContext.Recipes.GetRecipes(r => r.Products.Any(p => p.Name == "Tallow") && r.Ingredients.All(i => i.Name == "Raw Bacon")).Single());
 
             // Leather Hide
             preferred.Add("Leather Hide", _gameContext.Recipes.GetRecipes(r => r.Products.Any(p => p.Name == "Leather Hide")).First());
@@ -53,7 +53,7 @@ namespace EcoShop
             preferred.Add("Fur Pelt", _gameContext.Recipes.GetRecipes(r => r.Products.Any(p => p.Name == "Fur Pelt")).First());
 
             // Oil
-            preferred.Add("Oil", _gameContext.Recipes.GetRecipes(r => r.Products.Any(p => p.Name == "Oil")).First());
+            preferred.Add("Oil", _gameContext.Recipes.GetRecipes(r => r.Products.Any(p => p.Name == "Oil") && r.Ingredients.Any(i => i.Name == "Tallow")).Single());
 
             // Cereal Germ
             preferred.Add("Cereal Germ", _gameContext.Recipes.GetRecipes(r => r.Products.Any(p => p.Name == "Cereal Germ")).First());
